@@ -1,5 +1,6 @@
 package tests.alltests;
 
+import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
@@ -16,9 +17,9 @@ public class HomePageTest {
     public void homePageTest() throws InterruptedException {
 
         Driver.getDriver().get(ConfigurationReader.getProperty("amazon_url"));
-        homePage.searchBox.sendKeys("iphone");
-        homePage.searchInitiator.click();
-        String searchedTex= homePage.searchedText.getText().replaceAll("[^A-Za-z]","");
+        homePage.searchBox.sendKeys("iphone"+ Keys.ENTER);
+        //homePage.searchInitiator.click();
+        String searchedTex= homePage.searchedText.getText().replaceAll("\\p{Punct}","");
         Assert.assertEquals(searchedTex, "iphone");
 
         ReusableMethods.hover(homePage.languageDropdown);
@@ -39,7 +40,7 @@ public class HomePageTest {
         homePage.allDropdown.click();
         Assert.assertTrue(homePage.signInButtonDropdown.isDisplayed());
 
-        String chart= homePage.chartCount.getText().toString();
+        String chart= homePage.chartCount.getText();
         Assert.assertEquals(chart, "0");
 
         Thread.sleep(3000);
