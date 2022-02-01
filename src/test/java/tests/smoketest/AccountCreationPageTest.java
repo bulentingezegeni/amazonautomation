@@ -23,8 +23,9 @@ public class AccountCreationPageTest {
         createAccountPage.startHereText.click();
         createAccountPage.nameBox.sendKeys(Faker.instance().name().fullName());
         createAccountPage.emailBox.sendKeys(Faker.instance().internet().emailAddress());
-        createAccountPage.passwordBox.sendKeys(Faker.instance().internet().password());
-        createAccountPage.passwordCheck.sendKeys(Faker.instance().internet().password());
+        String pass = Faker.instance().internet().password().toString();
+        createAccountPage.passwordBox.sendKeys(pass);
+        createAccountPage.passwordCheck.sendKeys(pass);
 
         createAccountPage.continueButton.click();
         Assert.assertTrue(createAccountPage.passwordAlertText.isDisplayed());
